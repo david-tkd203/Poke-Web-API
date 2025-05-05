@@ -1,0 +1,60 @@
+{% extends "pokemon/base.html" %}
+{% load static %}
+
+{% block title %}Mi Perfil{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>Mi Perfil</h4>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <img src="{% static 'pokemon/images/pokeball.png' %}" 
+                            class="rounded-circle" 
+                            width="150" 
+                            alt="Avatar">
+                    </div>
+                    
+                    <h5 class="card-title">{{ user.username }}</h5>
+                    <p class="card-text">
+                        <strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}<br>
+                        <strong>Email:</strong> {{ user.email }}<br>
+                        <strong>Último acceso:</strong> {{ user.last_login|date:"d/m/Y H:i" }}<br>
+                        <strong>Miembro desde:</strong> {{ user.date_joined|date:"d/m/Y" }}
+                    </p>
+                    
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary">
+                            Editar Perfil
+                        </a>
+                        <a href="{% url 'password_change' %}" class="btn btn-outline-secondary">
+                            Cambiar Contraseña
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4>Mis Estadísticas Pokémon</h4>
+                </div>
+                <div class="card-body">
+                    <!-- Aquí puedes añadir estadísticas personalizadas del usuario -->
+                    <p>Pokémon vistos: 128</p>
+                    <p>Pokémon capturados: 87</p>
+                    <div class="progress mb-3">
+                        <div class="progress-bar bg-danger" style="width: 68%">68% completado</div>
+                    </div>
+                    <p class="text-muted">Entrenador desde: {{ user.date_joined|date:"F Y" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

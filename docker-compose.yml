@@ -1,0 +1,29 @@
+# docker-compose.yml
+
+services:
+  web:
+    build: .
+    command: gunicorn --bind 0.0.0.0:8000 evaluacion_ist.wsgi:application
+    volumes:
+      - .:/app
+      - static_volume:/app/staticfiles
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=evaluacion_ist.settings
+      - DEBUG=1
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=pokemondb
+      - POSTGRES_USER=pokemonuser
+      - POSTGRES_PASSWORD=pokemonpass
+
+volumes:
+  postgres_data:
+  static_volume:
