@@ -1,7 +1,7 @@
 
-# Evaluación Técnica - Proyecto Django
+Proyecto Django
 
-Este proyecto es una aplicación web desarrollada en **Django** como parte de una evaluación técnica. Permite el ingreso mediante login, consulta de datos desde una API pública (PokéAPI), procesamiento y visualización de esos datos en una vista protegida.
+Este proyecto es una aplicación web desarrollada en **Django**. Permite el ingreso mediante login, consulta de datos desde una API pública (PokéAPI), procesamiento y visualización de esos datos en una vista protegida.
 
 ---
 
