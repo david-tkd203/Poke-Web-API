@@ -14,11 +14,11 @@
                 <div class="card-body">
                     <div class="text-center mb-4">
                         <img src="{% static 'pokemon/images/pokeball.png' %}" 
-                            class="rounded-circle" 
-                            width="150" 
-                            alt="Avatar">
+                             class="rounded-circle" 
+                             width="150" 
+                             alt="Avatar">
                     </div>
-                    
+
                     <h5 class="card-title">{{ user.username }}</h5>
                     <p class="card-text">
                         <strong>Nombre:</strong> {{ user.first_name }} {{ user.last_name }}<br>
@@ -26,32 +26,55 @@
                         <strong>Último acceso:</strong> {{ user.last_login|date:"d/m/Y H:i" }}<br>
                         <strong>Miembro desde:</strong> {{ user.date_joined|date:"d/m/Y" }}
                     </p>
-                    
+
                     <div class="d-grid gap-2">
-                        <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary">
-                            Editar Perfil
-                        </a>
-                        <a href="{% url 'password_change' %}" class="btn btn-outline-secondary">
-                            Cambiar Contraseña
-                        </a>
+                        <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary">Editar Perfil</a>
+                        <a href="{% url 'password_change' %}" class="btn btn-outline-secondary">Cambiar Contraseña</a>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header bg-success text-white">
                     <h4>Mis Estadísticas Pokémon</h4>
                 </div>
                 <div class="card-body">
-                    <!-- Aquí puedes añadir estadísticas personalizadas del usuario -->
-                    <p>Pokémon vistos: 128</p>
-                    <p>Pokémon capturados: 87</p>
+                    <p>Pokémon vistos: {{ vistos_count }}</p>
+                    <p>Pokémon capturados: {{ atrapados_count }}</p>
                     <div class="progress mb-3">
-                        <div class="progress-bar bg-danger" style="width: 68%">68% completado</div>
-                    </div>
+                        <div class="progress-bar bg-danger" style="width: {{ porcentaje_completado }}%">
+                            {{ porcentaje_completado }}% completado
+                        </div>
+                    </div>  
                     <p class="text-muted">Entrenador desde: {{ user.date_joined|date:"F Y" }}</p>
+
+                    <hr>
+
+                    <h5 class="mt-4">Lista de Pokémon atrapados:</h5>
+                    <ul class="list-group mb-4">
+                        {% for p in atrapados %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                {{ p.nombre_pokemon|title }}
+                                <form method="post" action="{% url 'liberar_pokemon' p.nombre_pokemon %}" class="ms-2">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-danger">Liberar</button>
+                                </form>
+                            </li>
+                        {% empty %}
+                            <li class="list-group-item">No has atrapado ningún Pokémon aún.</li>
+                        {% endfor %}
+                    </ul>
+
+                    <h5 class="mt-4">Lista de Pokémon vistos:</h5>
+                    <ul class="list-group">
+                        {% for p in vistos %}
+                            <li class="list-group-item">{{ p.nombre_pokemon|title }}</li>
+                        {% empty %}
+                            <li class="list-group-item">No has visto ningún Pokémon aún.</li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>

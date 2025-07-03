@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "pokemon.apps.PokemonConfig",
+    'rest_framework',
     ]
 
 LOGIN_URL = 'login'
@@ -47,7 +48,7 @@ LOGOUT_REDIRECT_URL = 'home'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # ¡Añadido aquí!
+    #"whitenoise.middleware.WhiteNoiseMiddleware",  # ¡Añadido aquí!
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -126,12 +127,21 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Configuración de base de datos
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB', 'pokemondb'),
-        'USER': os.getenv('POSTGRES_USER', 'pokemonuser'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'pokemonpass'),
-        'HOST': os.getenv('DB_HOST', 'db'),
-        'PORT': os.getenv('DB_PORT', '5432'),
+        #usado para conexion a localhost y sqlite3
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+
+        #usado para docker y conexion con postgresql
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': os.getenv('POSTGRES_DB', 'pokemondb'),
+        # 'USER': os.getenv('POSTGRES_USER', 'pokemonuser'),
+        # 'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'pokemonpass'),
+        # 'HOST': os.getenv('DB_HOST', 'db'),
+        # 'PORT': os.getenv('DB_PORT', '5432'),
+    },
+    'sqlite': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'dev_sqlite3.db',
     }
 }
 

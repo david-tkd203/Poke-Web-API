@@ -18,6 +18,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, reverse_lazy  # Añade reverse_lazy aquí
 from django.contrib.auth import views as auth_views
+from django.urls import include
+from pokemon.views_api import PokemonListAPI, PokemonDetailAPI
 from pokemon.views import (
     home, 
     login_view, 
@@ -53,4 +55,6 @@ urlpatterns = [
             template_name='pokemon/password_change_done.html'
         ),
         name='password_change_done'),
+    #ruta para rest
+    path('', include('pokemon.urls')),
 ]

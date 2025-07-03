@@ -1,0 +1,14 @@
+{% extends "pokemon/base.html" %}
+
+{% block title %}Detalles de {{ pokemon }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3>Registrar detalles de {{ pokemon }}</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+{% endblock %}
