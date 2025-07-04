@@ -1,5 +1,21 @@
+# Requisitos principales
 Django==4.2
 gunicorn==20.1.0
 psycopg2-binary==2.9.6
 requests==2.31.0
 whitenoise==6.4.0
+
+# Para API RESTful
+djangorestframework==3.14.0
+
+# Formularios mejorados (si usas crispy forms en tus plantillas)
+django-crispy-forms==2.0
+
+# CORS (si habilitas tu API para clientes externos como React, apps móviles, etc.)
+django-cors-headers==4.3.1
+
+# Autenticación por tokens (opcional)
+djangorestframework-simplejwt==5.3.1
+
+# Dotenv (para usar variables de entorno en entorno local o producción)
+python-dotenv==1.0.1

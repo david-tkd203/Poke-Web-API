@@ -123,6 +123,7 @@ evaluacion_ist/
 
 ## 🧑‍💻 Autor
 
-David_tkd203
+David Ñanculeo
+David Silva
 
 Este proyecto fue desarrollado como parte de una evaluación técnica para una vacante relacionada con desarrollo backend Django.
